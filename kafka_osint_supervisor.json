@@ -1,0 +1,44 @@
+{
+  "type": "kafka",
+  "spec": {
+    "ioConfig": {
+      "type": "kafka",
+      "consumerProperties": {
+        "bootstrap.servers": "host.docker.internal:29092"
+      },
+      "topic": "osint_events_v2",
+      "useEarliestOffset": true,
+      "inputFormat": {
+        "type": "json"
+      }
+    },
+    "dataSchema": {
+      "dataSource": "osint_events_v2",
+      "timestampSpec": {
+        "column": "timestamp",
+        "format": "iso"
+      },
+      "dimensionsSpec": {
+        "dimensions": [
+          "title",
+          "source",
+          "summary",
+          "link",
+          "status",
+          { "name": "matched_keywords", "type": "string" },
+          { "name": "latitude", "type": "double" },
+          { "name": "longitude", "type": "double" }
+        ]
+      },
+      "granularitySpec": {
+        "type": "uniform",
+        "segmentGranularity": "DAY",
+        "queryGranularity": "NONE",
+        "rollup": false
+      }
+    },
+    "tuningConfig": {
+      "type": "kafka"
+    }
+  }
+}

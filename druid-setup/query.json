@@ -1,0 +1,3 @@
+{
+  "query": "SELECT __time AS event_time, price, change_pct, change_abs FROM investing_oil_realtime ORDER BY __time DESC LIMIT 10"
+}
