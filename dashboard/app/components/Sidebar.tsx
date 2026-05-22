@@ -34,6 +34,13 @@ export default function Sidebar() {
         </Link>
 
         <Link 
+          href="/forex" 
+          className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold ${pathname.startsWith('/forex') ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'text-slate-500 hover:bg-slate-50'}`}
+        >
+          <Coins size={20} /> Giá Ngoại hối
+        </Link>
+
+        <Link 
           href="/intel" 
           className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold ${pathname.startsWith('/intel') ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'text-slate-500 hover:bg-slate-50'}`}
         >

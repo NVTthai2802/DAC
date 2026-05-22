@@ -4,7 +4,7 @@
     "ioConfig": {
       "type": "kafka",
       "consumerProperties": {
-        "bootstrap.servers": "localhost:9092"
+        "bootstrap.servers": "host.docker.internal:29092"
       },
       "topic": "forex_rates_full",
       "useEarliestOffset": true
