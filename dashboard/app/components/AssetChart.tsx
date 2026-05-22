@@ -64,13 +64,44 @@ export default function AssetChart({ data, latest }: { data: any[], latest: any 
         <div className="h-[1px] bg-slate-200 my-1" style={{ marginLeft: '20px', marginRight: '130px' }}></div>
 
         {/* BIỂU ĐỒ BIẾN ĐỘNG */}
-        <div className="h-[25%] w-full">
+        {/* <div className="h-[25%] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data} syncId="assetChart" margin={CHART_MARGIN}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
               <XAxis dataKey="time" stroke="#94a3b8" fontSize={11} minTickGap={50} tickLine={false} axisLine={false} />
               <YAxis orientation="right" tick={false} axisLine={false} width={YAXIS_WIDTH} />
               <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', border: '1px solid #cbd5e1', borderRadius: '8px' }} />
+              <Bar dataKey={(d) => Math.abs(d.change_abs || 0)} barSize={4} isAnimationActive={false}>
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={(entry.change_pct ?? 0) >= 0 ? '#22c55e' : '#ef4444'} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div> */}
+        {/* BIỂU ĐỒ BIẾN ĐỘNG */}
+        <div className="h-[25%] w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={data} syncId="assetChart" margin={CHART_MARGIN}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+              <XAxis dataKey="time" stroke="#94a3b8" fontSize={11} minTickGap={50} tickLine={false} axisLine={false} />
+              
+              {/* KHÓA TRẦN TRỤC Y: Tối đa hiển thị biên độ 2 USD, vọt quá thì cắt ngọn */}
+              <YAxis 
+                orientation="right" 
+                tick={false} 
+                axisLine={false} 
+                width={YAXIS_WIDTH} 
+                domain={[0, 2]} 
+                allowDataOverflow={true} 
+              />
+              
+              <Tooltip 
+                cursor={{ fill: '#f1f5f9' }} 
+                contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', border: '1px solid #cbd5e1', borderRadius: '8px' }} 
+              />
+              
+              {/* Trả lại giá trị gốc, không cần nhân 100 nữa */}
               <Bar dataKey={(d) => Math.abs(d.change_abs || 0)} barSize={4} isAnimationActive={false}>
                 {data.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={(entry.change_pct ?? 0) >= 0 ? '#22c55e' : '#ef4444'} />

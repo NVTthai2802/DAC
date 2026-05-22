@@ -27,6 +27,13 @@ export default function Sidebar() {
         </Link>
 
         <Link 
+          href="/gold" 
+          className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold ${pathname.startsWith('/gold') ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'text-slate-500 hover:bg-slate-50'}`}
+        >
+          <Coins size={20} /> Giá Vàng Thế Giới
+        </Link>
+
+        <Link 
           href="/intel" 
           className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold ${pathname.startsWith('/intel') ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'text-slate-500 hover:bg-slate-50'}`}
         >
@@ -36,6 +43,7 @@ export default function Sidebar() {
         <button className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-50 rounded-xl transition-all cursor-not-allowed">
           <div className="w-5 h-5 border-2 border-slate-300 rounded-full" /> Giá Bạc (Sắp có)
         </button>
+
       </nav>
     </aside>
   );

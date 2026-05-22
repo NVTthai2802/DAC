@@ -2,7 +2,7 @@
   "type": "kafka",
   "spec": {
     "dataSchema": {
-      "dataSource": "investing_oil_realtime",
+      "dataSource": "oil_prices_topic",
       "timestampSpec": {
         "column": "timestamp",
         "format": "iso"
@@ -10,9 +10,7 @@
       "dimensionsSpec": {
         "dimensions": [
           "asset",
-          {"type": "double", "name": "price"},
-          {"type": "double", "name": "change_pct"},
-          {"type": "double", "name": "change_abs"}
+          {"type": "double", "name": "price"}
         ]
       },
       "granularitySpec": {

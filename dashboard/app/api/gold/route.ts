@@ -5,10 +5,10 @@ export async function GET() {
   
   // Sửa lại câu lệnh SQL: bọc "time" trong ngoặc kép
   const sqlQuery = {
-    query: `SELECT __time AS "time", price, change_pct 
-            FROM investing_gold_realtime 
+    query: `SELECT __time AS "time", price, asset
+            FROM gold_prices_topic
             ORDER BY __time DESC 
-            LIMIT 20`
+            LIMIT 1000`
   };
 
   try {
@@ -26,15 +26,39 @@ export async function GET() {
         console.error("Lỗi từ Druid:", rawData);
         return NextResponse.json({ error: 'Druid trả về lỗi', details: rawData }, { status: 500 });
     }
-    
-    const chartData = rawData.reverse().map((item: any) => {
-    //   const dateObj = new Date(item.time);
-    //   const timeString = dateObj.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    //   return { ...item, time: timeString };
-        const timeString = item.time.substring(11, 19); 
-        return { ...item, time: timeString };
-    });
 
+    const chronologicalData = rawData.reverse();
+
+    // SỬA LỖI 1 (tiếp): Tự động tính toán biến động giá (change_abs, change_pct) bằng code JS
+    const chartData = chronologicalData.map((item: any, index: number, arr: any[]) => {
+        // const timeString = item.time.substring(11, 19); 
+        const dateObj = new Date(item.time);
+        
+        // Ép múi giờ chuẩn và định dạng 24h
+        const timeString = dateObj.toLocaleTimeString('vi-VN', { 
+            timeZone: 'Asia/Ho_Chi_Minh',
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit',
+            hour12: false
+        });
+        
+        let change_abs = 0;
+        let change_pct = 0;
+        
+        if (index > 0) {
+            const prevItem = arr[index - 1];
+            change_abs = parseFloat((item.price - prevItem.price).toFixed(2));
+            change_pct = parseFloat(((change_abs / prevItem.price) * 100).toFixed(2));
+        }
+
+        return { 
+          ...item, 
+          time: timeString, 
+          change_abs: change_abs,
+          change_pct: change_pct
+        };
+    });
     return NextResponse.json(chartData);
   } catch (error) {
     console.error("Lỗi hệ thống Next.js:", error);
