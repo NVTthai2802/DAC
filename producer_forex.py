@@ -11,7 +11,7 @@ producer = KafkaProducer(
 )
 
 KAFKA_TOPIC = "forex_rates_topic"
-API_KEY = "YOUR_API_KEY_HERE"  # <-- ĐIỀN API KEY CỦA BẠN VÀO ĐÂY
+API_KEY = "59f5696c63ce4d27bef7691e"  # <-- ĐIỀN API KEY CỦA BẠN VÀO ĐÂY
 
 print("💱 HỆ THỐNG DATA INGESTION (FOREX - EXCHANGERATE-API) ĐÃ KHỞI ĐỘNG...")
 

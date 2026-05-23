@@ -32,8 +32,8 @@
       },
       "granularitySpec": {
         "type": "uniform",
-        "segmentGranularity": "DAY",
-        "queryGranularity": "NONE",
+        "segmentGranularity": "MINUTE",
+        "queryGranularity": "MINUTE",
         "rollup": false
       }
     },

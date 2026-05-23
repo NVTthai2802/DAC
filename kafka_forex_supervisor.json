@@ -3,29 +3,31 @@
   "spec": {
     "ioConfig": {
       "type": "kafka",
+      "inputFormat": {
+        "type": "json"
+      },
       "consumerProperties": {
         "bootstrap.servers": "host.docker.internal:29092"
       },
-      "topic": "forex_rates_full",
+      "topic": "forex_rates_topic",
       "useEarliestOffset": true
     },
     "dataSchema": {
-      "dataSource": "forex_rates_full",
+      "dataSource": "forex_rates_topic",
       "timestampSpec": {
         "column": "timestamp",
         "format": "iso"
       },
       "dimensionsSpec": {
         "dimensions": [
-          { "name": "currency", "type": "string" },
-          { "name": "rate", "type": "double" },
-          { "name": "quota_remaining", "type": "long" }
+          { "name": "asset", "type": "string" },
+          { "name": "price", "type": "double" }
         ]
       },
       "granularitySpec": {
         "type": "uniform",
-        "segmentGranularity": "DAY",
-        "queryGranularity": "NONE",
+        "segmentGranularity": "MINUTE",
+        "queryGranularity": "MINUTE",
         "rollup": false
       }
     },

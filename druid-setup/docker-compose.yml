@@ -114,6 +114,9 @@ services:
       - "8100-8105:8100-8105"
     command:
       - middleManager
+    environment:
+      - DRUID_SINGLE_NODE_CONF=micro-quickstart
+      - druid_worker_capacity=5
     env_file:
       - environment
 
