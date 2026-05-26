@@ -1,14 +1,11 @@
 Archive_Gold/
 Giá Vàng Thế Giới - Investing.com/
 Giá Dầu Thế Giới - Investing.com/
-gold-dashboard/
-gold_price.py
 
 node_modules/
 dashboard/node_modules/
 app/node_modules/
 public/
-
 
 # Thư mục build tự động của Next.js
 .next/

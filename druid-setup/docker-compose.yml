@@ -101,6 +101,7 @@ services:
 
   middlemanager:
     image: apache/druid:37.0.0
+    mem_limit: 8g    
     container_name: middlemanager
     volumes:
       - druid_shared:/opt/shared
