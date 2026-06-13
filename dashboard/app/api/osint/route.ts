@@ -27,6 +27,10 @@ export async function GET() {
     const responseText = await response.text();
 
     if (!response.ok) {
+      if (response.status === 502 || response.status === 503 || response.status === 404) {
+        console.warn(`⏳ Druid đang khởi động (Status: ${response.status}). Vui lòng đợi...`);
+        return NextResponse.json([]);
+      }
       console.error("❌ Druid phản hồi lỗi:", responseText);
       return NextResponse.json({ error: 'Druid query failed', details: responseText }, { status: response.status });
     }
