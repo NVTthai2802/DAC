@@ -1,0 +1,21 @@
+{
+    "is_timeseries": true,
+    "thong_tin": "Gia Vang the gioi (Gold Futures - GC=F)",
+    "don_vi": "USD / Troy Ounce",
+    "nguon": {
+        "ten": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/quote/GC=F/"
+    },
+    "phuong_thuc": "Python SDK (yfinance - ticker.fast_info.last_price)",
+    "tan_suat": "5 giay / lan",
+    "kafka_topic": "gold_prices_topic",
+    "druid_datasource": "gold_prices_topic",
+    "producer_file": "producer_gold.py",
+    "supervisor_file": "kafka_gold_supervisor.json",
+    "cac_truong_du_lieu": [
+        "asset",
+        "price"
+    ],
+    "ghi_chu": "Su dung ticker GC=F (COMEX Gold Futures). Gia cap nhat 24/5 theo gio thi truong My.",
+    "type_data": "Real-time Streaming"
+}

@@ -1,0 +1,9 @@
+kafka-python-ng
+yfinance
+requests
+feedparser
+spacy
+geopy
+vnstock
+pandas
+python-dotenv

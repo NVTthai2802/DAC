@@ -1,0 +1,25 @@
+{
+    "is_timeseries": true,
+    "thong_tin": "Gia Dau Tho the gioi (WTI Crude Oil CL=F va Brent Crude BZ=F)",
+    "don_vi": "USD / Thung (Barrel)",
+    "nguon": {
+        "ten": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/quote/CL=F/"
+    },
+    "phuong_thuc": "Python SDK (yfinance - ticker.fast_info.last_price)",
+    "tan_suat": "5 giay / lan",
+    "kafka_topic": "oil_prices_topic",
+    "druid_datasource": "oil_prices_topic",
+    "producer_file": "oil-pipeline/producer_oil.py",
+    "supervisor_file": "kafka_oil_supervisor.json",
+    "cac_loai_dau": {
+        "OIL_WTI": "CL=F (West Texas Intermediate)",
+        "OIL_BRENT": "BZ=F (Brent Crude - Bien Bac)"
+    },
+    "cac_truong_du_lieu": [
+        "asset",
+        "price"
+    ],
+    "ghi_chu": "Thu thap dong thoi 2 loai dau. Producer nam trong thu muc oil-pipeline/. Kafka dung cong 29092 (Docker internal).",
+    "type_data": "Real-time Streaming"
+}

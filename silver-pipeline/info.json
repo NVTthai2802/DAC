@@ -1,0 +1,21 @@
+{
+    "is_timeseries": true,
+    "thong_tin": "Gia Bac the gioi (Silver Futures - SI=F)",
+    "don_vi": "USD / Troy Ounce",
+    "nguon": {
+        "ten": "Yahoo Finance",
+        "url": "https://finance.yahoo.com/quote/SI=F/"
+    },
+    "phuong_thuc": "Python SDK (yfinance - ticker.fast_info.last_price)",
+    "tan_suat": "5 giay / lan",
+    "kafka_topic": "silver_prices_topic",
+    "druid_datasource": "silver_prices_topic",
+    "producer_file": "producer_silver.py",
+    "supervisor_file": "kafka_silver_supervisor.json",
+    "cac_truong_du_lieu": [
+        "asset",
+        "price"
+    ],
+    "ghi_chu": "Su dung ticker SI=F (COMEX Silver Futures). Gia cap nhat 24/5 theo gio thi truong My.",
+    "type_data": "Real-time Streaming"
+}

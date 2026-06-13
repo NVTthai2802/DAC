@@ -1,0 +1,60 @@
+{
+  "type": "kafka",
+  "spec": {
+    "dataSchema": {
+      "dataSource": "vn_stock_topic",
+      "timestampSpec": {
+        "column": "timestamp",
+        "format": "iso"
+      },
+      "dimensionsSpec": {
+        "dimensions": [
+          "ticker",
+          {"type": "double", "name": "price"},
+          {"type": "double", "name": "volume"},
+          {"type": "double", "name": "ref_price"},
+          {"type": "double", "name": "ceil_price"},
+          {"type": "double", "name": "floor_price"},
+          {"type": "double", "name": "total_vol"},
+          {"type": "double", "name": "high"},
+          {"type": "double", "name": "low"},
+          {"type": "double", "name": "bid_1_price"},
+          {"type": "double", "name": "bid_1_vol"},
+          {"type": "double", "name": "bid_2_price"},
+          {"type": "double", "name": "bid_2_vol"},
+          {"type": "double", "name": "bid_3_price"},
+          {"type": "double", "name": "bid_3_vol"},
+          {"type": "double", "name": "ask_1_price"},
+          {"type": "double", "name": "ask_1_vol"},
+          {"type": "double", "name": "ask_2_price"},
+          {"type": "double", "name": "ask_2_vol"},
+          {"type": "double", "name": "ask_3_price"},
+          {"type": "double", "name": "ask_3_vol"}
+        ]
+      },
+      "granularitySpec": {
+        "type": "uniform",
+        "segmentGranularity": "MINUTE",
+        "queryGranularity": "MINUTE",
+        "rollup": false
+      }
+    },
+    "ioConfig": {
+      "topic": "vn_stock_topic",
+      "inputFormat": {
+        "type": "json"
+      },
+      "consumerProperties": {
+        "bootstrap.servers": "kafka:29092"
+      },
+      "taskCount": 1,
+      "replicas": 1,
+      "taskDuration": "PT1H",
+      "useEarliestOffset": true
+    },
+    "tuningConfig": {
+      "type": "kafka",
+      "maxRowsPerSegment": 5000000
+    }
+  }
+}

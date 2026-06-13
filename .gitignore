@@ -2,6 +2,7 @@ Archive_Gold/
 Giá Vàng Thế Giới - Investing.com/
 Giá Dầu Thế Giới - Investing.com/
 
+# ===== NODE.JS =====
 node_modules/
 dashboard/node_modules/
 app/node_modules/
@@ -17,17 +18,34 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-.env
-.env*.local
+# ===== PYTHON =====
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Môi trường ảo Python (nếu sau này bạn có tạo)
+# Môi trường ảo Python
 venv/
 .venv/
 env/
 
-# File rác của hệ điều hành
+# ===== BÍ MẬT & CẤU HÌNH CÁ NHÂN =====
+.env
+.env*.local
+
+# File log request Forex (trạng thái cá nhân, không nên push)
+forex_request_log.json
+
+# ===== FILE DEMO CÁ NHÂN =====
+# demo.bat là file tiện ích chạy trên máy cá nhân
+# Sếp sẽ có môi trường deploy riêng
+demo.bat
+
+# ===== HỆ ĐIỀU HÀNH =====
 .DS_Store
 Thumbs.db
+
+# ===== IDE =====
+.idea/
+.vscode/
+*.swp
+*.swo

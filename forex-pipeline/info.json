@@ -1,0 +1,26 @@
+{
+    "is_timeseries": true,
+    "thong_tin": "Ty gia Ngoai hoi (Forex) - USD/JPY, USD/VND, EUR/USD",
+    "don_vi": "Ty le hoi doai",
+    "nguon": {
+        "ten": "ExchangeRate-API",
+        "url": "https://www.exchangerate-api.com/"
+    },
+    "phuong_thuc": "REST API (GET https://v6.exchangerate-api.com/v6/{API_KEY}/latest/USD)",
+    "tan_suat": "60 giay / lan (khuyen nghi 3600 giay cho goi Free)",
+    "kafka_topic": "forex_rates_topic",
+    "druid_datasource": "forex_rates_topic",
+    "producer_file": "producer_forex.py",
+    "supervisor_file": "kafka_forex_supervisor.json",
+    "cac_cap_tien": [
+        "USD/JPY",
+        "USD/VND",
+        "EUR/USD"
+    ],
+    "cac_truong_du_lieu": [
+        "asset",
+        "price"
+    ],
+    "ghi_chu": "Dung chien thuat Base-USD de tiet kiem so luong API call. Goi Free: 1,500 requests/thang. Muc an toan: 1 gio/lan.",
+    "type_data": "Real-time Streaming"
+}

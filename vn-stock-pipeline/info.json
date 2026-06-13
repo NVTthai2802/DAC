@@ -1,0 +1,41 @@
+{
+    "is_timeseries": true,
+    "thong_tin": "Du lieu khop lenh Chung khoan Viet Nam (VN30, HNX30 va cac ma pho bien)",
+    "don_vi": "VND (Gia), Co phieu (Khoi luong)",
+    "nguon": {
+        "ten": "TCBS / VCI",
+        "url": "https://github.com/thinh-vu/vnstock"
+    },
+    "phuong_thuc": "Python SDK (vnstock Trading API)",
+    "tan_suat": "5 giay / lan",
+    "kafka_topic": "vn_stock_topic",
+    "druid_datasource": "vn_stock_topic",
+    "producer_file": "producer_stock.py",
+    "supervisor_file": "kafka_stock_supervisor.json",
+    "so_luong_ma": 60,
+    "cac_truong_du_lieu": [
+        "ticker",
+        "price",
+        "volume",
+        "ref_price",
+        "ceil_price",
+        "floor_price",
+        "total_vol",
+        "high",
+        "low",
+        "bid_1_price",
+        "bid_1_vol",
+        "bid_2_price",
+        "bid_2_vol",
+        "bid_3_price",
+        "bid_3_vol",
+        "ask_1_price",
+        "ask_1_vol",
+        "ask_2_price",
+        "ask_2_vol",
+        "ask_3_price",
+        "ask_3_vol"
+    ],
+    "ghi_chu": "Chi hoat dong trong gio hanh chinh (9h-15h). Bo qua cac ma co gia = 0. Du lieu gom 3 buoc gia mua/ban tot nhat.",
+    "type_data": "Real-time Streaming"
+}

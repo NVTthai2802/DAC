@@ -29,9 +29,9 @@ const CustomPriceLabel = ({ viewBox, value }: any) => {
 
 export default function AssetChart({ data, latest }: { data: any[], latest: any }) {
   return (
-    <div className="flex-1 bg-white m-8 mt-2 rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
-        <h3 className="text-sm font-bold text-slate-600 flex items-center gap-2 uppercase tracking-widest">
+    <div className="flex-1 bg-white dark:bg-slate-900 m-8 mt-2 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
+        <h3 className="text-sm font-bold text-slate-600 dark:text-slate-300 flex items-center gap-2 uppercase tracking-widest">
           <Clock size={16} className="text-blue-500" /> Biểu đồ kỹ thuật
         </h3>
       </div>
@@ -61,7 +61,7 @@ export default function AssetChart({ data, latest }: { data: any[], latest: any 
         </div>
 
         {/* ĐƯỜNG NGĂN CÁCH */}
-        <div className="h-[1px] bg-slate-200 my-1" style={{ marginLeft: '20px', marginRight: '130px' }}></div>
+        <div className="h-[1px] bg-slate-200 dark:bg-slate-700 my-1" style={{ marginLeft: '20px', marginRight: '130px' }}></div>
 
         {/* BIỂU ĐỒ BIẾN ĐỘNG */}
         {/* <div className="h-[25%] w-full">
@@ -92,8 +92,7 @@ export default function AssetChart({ data, latest }: { data: any[], latest: any 
                 tick={false} 
                 axisLine={false} 
                 width={YAXIS_WIDTH} 
-                domain={[0, 2]} 
-                allowDataOverflow={true} 
+                domain={[0, 'auto']} 
               />
               
               <Tooltip 
@@ -102,7 +101,7 @@ export default function AssetChart({ data, latest }: { data: any[], latest: any 
               />
               
               {/* Trả lại giá trị gốc, không cần nhân 100 nữa */}
-              <Bar dataKey={(d) => Math.abs(d.change_abs || 0)} barSize={4} isAnimationActive={false}>
+              <Bar dataKey={(d) => Math.abs(d.change_abs || 0)} barSize={6} isAnimationActive={false}>
                 {data.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={(entry.change_pct ?? 0) >= 0 ? '#22c55e' : '#ef4444'} />
                 ))}

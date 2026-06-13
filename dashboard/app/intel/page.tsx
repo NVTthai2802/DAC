@@ -38,7 +38,7 @@ export default function IntelDashboard() {
   const mapEvents = events.filter(ev => ev.latitude != null && ev.longitude != null);
 
   return (
-    <div className="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50">
+    <div className="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
       
       {/* Header */}
       <IntelHeader />
@@ -50,26 +50,26 @@ export default function IntelDashboard() {
           {/* CỘT TRÁI (Chiếm 2/3): HIỂN THỊ BẢN ĐỒ */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold text-slate-800">Bản đồ Vệ tinh Thời gian thực</h2>
-              <span className="text-sm font-semibold text-slate-500 bg-slate-200 px-3 py-1 rounded-full">
+              <h2 className="text-xl font-bold text-slate-800 dark:text-white">Bản đồ Vệ tinh Thời gian thực</h2>
+              <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 bg-slate-200 dark:bg-slate-700 px-3 py-1 rounded-full">
                 Đã quét {mapEvents.length} tọa độ
               </span>
             </div>
             
             {/* Gọi Component bản đồ đã bọc next/dynamic */}
-            <div className="bg-white p-2 rounded-2xl border border-slate-200 shadow-sm h-[600px]">
+            <div className="bg-white dark:bg-slate-900 p-2 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm h-[600px]">
                 <OsintMap events={mapEvents} />
             </div>
           </div>
 
           {/* CỘT PHẢI (Chiếm 1/3): DÒNG THỜI GIAN TIN TỨC */}
           <div className="lg:col-span-1 space-y-4">
-             <h2 className="text-xl font-bold text-slate-800 mb-6">Dòng thời gian Sự kiện</h2>
+             <h2 className="text-xl font-bold text-slate-800 dark:text-white mb-6">Dòng thời gian Sự kiện</h2>
              
              {/* Box có scroll dọc riêng biệt cho danh sách tin */}
-             <div className="relative border-l-2 border-slate-200 ml-4 pl-8 flex flex-col gap-6 max-h-[600px] overflow-y-auto pr-2 pb-10 custom-scrollbar">
+             <div className="relative border-l-2 border-slate-200 dark:border-slate-700 ml-4 pl-8 flex flex-col gap-6 max-h-[600px] overflow-y-auto pr-2 pb-10 custom-scrollbar">
               {events.length === 0 ? (
-                <p className="text-slate-500 animate-pulse font-medium">Đang rà quét tần số vệ tinh...</p>
+                <p className="text-slate-500 dark:text-slate-400 animate-pulse font-medium">Đang rà quét tần số vệ tinh...</p>
               ) : (
                 events.map((ev, idx) => <EventCard key={idx} event={ev} />)
               )}

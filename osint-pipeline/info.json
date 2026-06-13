@@ -1,0 +1,35 @@
+{
+    "is_timeseries": true,
+    "thong_tin": "Thu thap va phan tich tin tuc quoc te tu nguon mo (OSINT) kem trich xuat dia ly tu dong",
+    "don_vi": "Bai bao / Su kien",
+    "nguon": {
+        "ten": "Al Jazeera RSS",
+        "url": "https://www.aljazeera.com/xml/rss/all.xml"
+    },
+    "phuong_thuc": "RSS Parsing (feedparser) + NLP NER (spaCy en_core_web_sm) + Geocoding (geopy/Nominatim)",
+    "tan_suat": "60 giay / lan (quet RSS)",
+    "kafka_topic": "osint_events_v2",
+    "druid_datasource": "osint_events_v2",
+    "producer_file": "osint-pipeline/producer_osint.py",
+    "supervisor_file": "kafka_osint_supervisor.json",
+    "cac_truong_du_lieu": [
+        "title",
+        "source",
+        "summary",
+        "link",
+        "matched_keywords",
+        "latitude",
+        "longitude",
+        "status"
+    ],
+    "cong_nghe_AI": {
+        "NLP_model": "spaCy en_core_web_sm",
+        "NER_labels": [
+            "GPE (Quoc gia/Thanh pho)",
+            "LOC (Dia ly)"
+        ],
+        "geocoding": "OpenStreetMap / Nominatim"
+    },
+    "ghi_chu": "Co bo nho dem (cache) de giam tai API geocoding. Co chong gui trung tin (seen_entries). Lay TOAN BO tin tuc, khong loc tu khoa.",
+    "type_data": "Real-time Streaming / Event-driven"
+}

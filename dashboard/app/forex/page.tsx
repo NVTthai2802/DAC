@@ -42,16 +42,16 @@ export default function ForexPage() {
   const isPositive = (latest?.change_pct ?? 0) >= 0;
 
   return (
-    <main className="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50">
+    <main className="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
       <header className="flex flex-col gap-4 p-8 pb-2">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-extrabold text-slate-900">Thị trường Ngoại hối (Forex)</h1>
-            <p className="text-slate-500 text-sm mt-1">Hệ thống giám sát dữ liệu tiền tệ Real-time độ trễ thấp</p>
+            <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white">Thị trường Ngoại hối (Forex)</h1>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Hệ thống giám sát dữ liệu tiền tệ Real-time độ trễ thấp</p>
           </div>
-          <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full border border-red-200 shadow-sm">
+          <div className="flex items-center gap-2 bg-red-50 dark:bg-red-950 px-4 py-2 rounded-full border border-red-200 dark:border-red-800 shadow-sm">
             <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-            <span className="text-sm font-semibold text-red-700 uppercase tracking-wider">Live Market</span>
+            <span className="text-sm font-semibold text-red-700 dark:text-red-400 uppercase tracking-wider">Live Market</span>
           </div>
         </div>
 
@@ -64,7 +64,7 @@ export default function ForexPage() {
               className={`px-5 py-2 rounded-lg font-bold transition-all ${
                 selectedPair === pair 
                 ? 'bg-blue-600 text-white shadow-md' 
-                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+                : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700'
               }`}
             >
               {pair}
@@ -75,21 +75,21 @@ export default function ForexPage() {
 
       {/* FOREX STATS (Tùy chỉnh riêng để không bị giới hạn 2 chữ số của file cũ) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 py-4">
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Tỷ giá hiện tại</p>
-          <h2 className="text-4xl font-black text-slate-900">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+          <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Tỷ giá hiện tại</p>
+          <h2 className="text-4xl font-black text-slate-900 dark:text-white">
             {latest?.price ? latest.price.toFixed(decimals) : '---'}
           </h2>
         </div>
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Biến động (Pips / Abs)</p>
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+          <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Biến động (Pips / Abs)</p>
           <div className={`flex items-center gap-2 text-3xl font-black ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
             {isPositive ? <ArrowUpRight strokeWidth={3} /> : <ArrowDownRight strokeWidth={3} />}
             {latest?.change_abs ? Math.abs(latest.change_abs).toFixed(decimals) : '0'}
           </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">% Thay đổi</p>
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+          <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">% Thay đổi</p>
           <div className={`flex items-center gap-2 text-3xl font-black ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
             <Activity strokeWidth={3} size={28} />
             {latest?.change_pct ? Math.abs(latest.change_pct).toFixed(3) : '0'}%
@@ -102,7 +102,7 @@ export default function ForexPage() {
         {data.length > 0 ? (
           <AssetChart data={data} latest={latest} />
         ) : (
-          <div className="flex items-center justify-center h-full text-slate-400">Đang đồng bộ dữ liệu...</div>
+          <div className="flex items-center justify-center h-full text-slate-400 dark:text-slate-500">Đang đồng bộ dữ liệu...</div>
         )}
       </div>
     </main>

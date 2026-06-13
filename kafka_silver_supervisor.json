@@ -2,7 +2,7 @@
   "type": "kafka",
   "spec": {
     "dataSchema": {
-      "dataSource": "oil_prices_topic",
+      "dataSource": "silver_prices_topic",
       "timestampSpec": {
         "column": "timestamp",
         "format": "iso"
@@ -21,7 +21,7 @@
       }
     },
     "ioConfig": {
-      "topic": "oil_prices_topic",
+      "topic": "silver_prices_topic",
       "inputFormat": {
         "type": "json"
       },

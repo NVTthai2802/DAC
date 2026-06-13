@@ -8,15 +8,17 @@ type AssetData = {
   time: string;
   price: number;
   asset?: string;
+  change_pct?: number;
+  change_abs?: number;
 };
 
-export default function GoldPage() {
+export default function SilverPage() {
   const [data, setData] = useState<AssetData[]>([]);
   const [latest, setLatest] = useState<AssetData | null>(null);
 
   const fetchData = async () => {
     try {
-      const res = await fetch('/api/gold');
+      const res = await fetch('/api/silver');
       if (!res.ok) return;
 
       const jsonData = await res.json();
@@ -39,8 +41,8 @@ export default function GoldPage() {
     <main className="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
       <header className="flex justify-between items-center p-8 pb-4">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white">{latest?.asset || 'Giá Vàng Thế Giới'}</h1>
-          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Hệ thống giám sát dữ liệu Real-time Kafka & Druid</p>
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white">{latest?.asset || 'Giá Bạc Thế Giới'}</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Hệ thống giám sát dữ liệu Real-time Kafka &amp; Druid</p>
         </div>
         <div className="flex items-center gap-2 bg-green-50 dark:bg-green-950 px-4 py-2 rounded-full border border-green-200 dark:border-green-800 shadow-sm">
           <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />

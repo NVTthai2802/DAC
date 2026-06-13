@@ -38,15 +38,15 @@ export default function OilPage() {
   }, []);
 
   return (
-    <main className="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50">
+    <main className="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
       <header className="flex justify-between items-center p-8 pb-4">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900">{latest?.asset || 'WTI Crude Oil'}</h1>
-          <p className="text-slate-500 text-sm mt-1">Hệ thống giám sát dữ liệu Real-time Kafka & Druid</p>
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white">{latest?.asset || 'WTI Crude Oil'}</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Hệ thống giám sát dữ liệu Real-time Kafka & Druid</p>
         </div>
-        <div className="flex items-center gap-2 bg-green-50 px-4 py-2 rounded-full border border-green-200 shadow-sm">
+        <div className="flex items-center gap-2 bg-green-50 dark:bg-green-950 px-4 py-2 rounded-full border border-green-200 dark:border-green-800 shadow-sm">
           <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
-          <span className="text-xs font-bold text-green-700 uppercase tracking-wide">Live</span>
+          <span className="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wide">Live</span>
         </div>
       </header>
 
