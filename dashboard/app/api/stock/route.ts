@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const druidUrl = 'http://127.0.0.1:8888/druid/v2/sql';
+  const druidUrl = `${process.env.DRUID_URL || 'http://localhost:8888'}/druid/v2/sql`;
 
   const sqlQuery = {
     query: `SELECT "ticker", 

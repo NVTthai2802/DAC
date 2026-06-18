@@ -5,7 +5,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const asset = searchParams.get('asset') || 'EUR/USD';
 
-  const druidUrl = 'http://localhost:8888/druid/v2/sql';
+  const druidUrl = `${process.env.DRUID_URL || 'http://localhost:8888'}/druid/v2/sql`;
   
   // Dùng WHERE để lấy đúng 1 cặp tiền duy nhất, chống lỗi "Điện tâm đồ"
   const sqlQuery = {

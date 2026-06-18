@@ -50,9 +50,11 @@ def get_coordinates_with_ner(title, summary):
         print(f"⚠️ Lỗi kết nối bản đồ tại {primary_location}: {e}")
         
     return None, None, None
+import os
 
+KAFKA_BROKER = os.environ.get("KAFKA_BROKER", "localhost:9092")
 producer = KafkaProducer(
-    bootstrap_servers=['localhost:9092'],
+    bootstrap_servers=[KAFKA_BROKER],
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 # KAFKA_TOPIC = "global_conflict_events"

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const druidUrl = 'http://localhost:8888/druid/v2/sql';
+  const druidUrl = `${process.env.DRUID_URL || 'http://localhost:8888'}/druid/v2/sql`;
   
   // SỬA LỖI 1 & 2: Lấy cột asset, bỏ các cột không tồn tại, và lọc riêng Dầu WTI
   const sqlQuery = {

@@ -11,9 +11,10 @@ from dotenv import load_dotenv
 # Load biến môi trường từ file .env
 load_dotenv()
 
-# Cấu hình Kafka
+# Cấu hình Kafka (hỗ trợ cả localhost và Docker)
+KAFKA_BROKER = os.environ.get("KAFKA_BROKER", "localhost:9092")
 producer = KafkaProducer(
-    bootstrap_servers=['localhost:9092'],
+    bootstrap_servers=[KAFKA_BROKER],
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
@@ -203,17 +204,31 @@ def fetch_forex_rates():
         if data.get("result") == "success":
             rates = data["conversion_rates"]
             
+            PRODUCER_INDEX = int(os.environ.get("PRODUCER_INDEX", "0"))
+            PRODUCER_TOTAL = int(os.environ.get("PRODUCER_TOTAL", "1"))
+            
+            currencies = []
+            if "JPY" in rates: currencies.append("JPY")
+            if "VND" in rates: currencies.append("VND")
+            if "EUR" in rates: currencies.append("EUR")
+            
+            # Chia tải các đồng tiền
+            chunk_size = max(1, len(currencies) // PRODUCER_TOTAL)
+            start_idx = PRODUCER_INDEX * chunk_size
+            end_idx = start_idx + chunk_size if PRODUCER_INDEX < PRODUCER_TOTAL - 1 else len(currencies)
+            
+            my_currencies = currencies[start_idx:end_idx]
+            
             # 1. Lấy tỷ giá USD/JPY
-            if "JPY" in rates:
+            if "JPY" in my_currencies:
                 send_to_kafka("USD/JPY", rates["JPY"])
                 
             # 2. Lấy tỷ giá USD/VND
-            if "VND" in rates:
+            if "VND" in my_currencies:
                 send_to_kafka("USD/VND", rates["VND"])
                 
             # 3. Tính tỷ giá EUR/USD
-            # Vì API trả về USD/EUR, ta lấy 1 chia cho số đó sẽ ra EUR/USD
-            if "EUR" in rates:
+            if "EUR" in my_currencies:
                 eur_usd = 1.0 / rates["EUR"]
                 send_to_kafka("EUR/USD", eur_usd)
         else:

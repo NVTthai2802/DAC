@@ -17,7 +17,8 @@ export async function GET() {
   `;
 
   try {
-    const response = await fetch('http://127.0.0.1:8888/druid/v2/sql', {
+    const druidUrl = `${process.env.DRUID_URL || 'http://localhost:8888'}/druid/v2/sql`;
+    const response = await fetch(druidUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
@@ -27,6 +28,10 @@ export async function GET() {
     const responseText = await response.text();
 
     if (!response.ok) {
+      if (response.status === 502 || response.status === 503 || response.status === 404) {
+        console.warn(`⏳ Druid đang khởi động (Status: ${response.status}). Vui lòng đợi...`);
+        return NextResponse.json([]);
+      }
       console.error("❌ Druid phản hồi lỗi:", responseText);
       return NextResponse.json({ error: 'Druid query failed', details: responseText }, { status: response.status });
     }

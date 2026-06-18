@@ -1,0 +1,46 @@
+# =============================================================================
+# Dockerfile.producer - Image dùng chung cho tất cả 6 Python producers
+# Octoparse Data Pipeline
+# =============================================================================
+
+FROM python:3.10-slim
+
+# Metadata
+LABEL maintainer="Octoparse Team"
+LABEL description="Python producer image for Octoparse data pipelines"
+
+# Tránh interactive prompts khi install packages
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# Cài đặt system dependencies (cần cho một số thư viện Python)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        gcc \
+        g++ \
+        curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Thiết lập thư mục làm việc
+WORKDIR /app
+
+# Copy requirements trước để tận dụng Docker layer cache
+COPY requirements.txt .
+
+# Cài đặt Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Cài đặt spaCy model cho OSINT pipeline (Thêm retry chống lỗi mạng chập chờn)
+RUN for i in 1 2 3; do python -m spacy download en_core_web_sm && break || sleep 5; done
+
+# Copy toàn bộ source code
+COPY producer_gold.py .
+COPY producer_silver.py .
+COPY producer_forex.py .
+COPY producer_stock.py .
+COPY oil-pipeline/ ./oil-pipeline/
+COPY osint-pipeline/ ./osint-pipeline/
+COPY .env* ./
+
+# Mặc định chạy producer_gold (sẽ bị override bởi docker-compose command)
+CMD ["python", "-u", "producer_gold.py"]
