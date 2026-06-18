@@ -26,9 +26,9 @@
         "type": "json"
       },
       "consumerProperties": {
-        "bootstrap.servers": "kafka:29092"
+        "bootstrap.servers": "kafka-1:29092,kafka-2:29093,kafka-3:29094"
       },
-      "taskCount": 1,
+      "taskCount": 2,
       "replicas": 1,
       "taskDuration": "PT1H",
       "useEarliestOffset": true

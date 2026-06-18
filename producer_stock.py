@@ -1,19 +1,21 @@
 import json
 import time
+import os
 from datetime import datetime
 from kafka import KafkaProducer
 from vnstock import Trading
 
-# Cấu hình Kafka
+# Cấu hình Kafka (hỗ trợ cả localhost và Docker)
+KAFKA_BROKER = os.environ.get("KAFKA_BROKER", "localhost:9092")
 producer = KafkaProducer(
-    bootstrap_servers=['localhost:9092'],
+    bootstrap_servers=[KAFKA_BROKER],
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
 KAFKA_TOPIC = "vn_stock_topic"
 
 # VN30, HNX30 và một số mã phổ biến (khoảng 60 mã)
-SYMBOLS = [
+ALL_SYMBOLS = [
     'ACB', 'BCM', 'BID', 'BVH', 'CTG', 'FPT', 'GAS', 'GVR', 'HDB', 'HPG', 
     'MBB', 'MSN', 'MWG', 'PLX', 'POW', 'SAB', 'SHB', 'SSB', 'SSI', 'STB', 
     'TCB', 'TPB', 'VCB', 'VHM', 'VIB', 'VIC', 'VJC', 'VNM', 'VPB', 'VRE',
@@ -22,7 +24,18 @@ SYMBOLS = [
     'DGC', 'VCI', 'HCM', 'VND', 'HSG', 'NKG', 'DIG', 'DXG', 'PVD', 'KBC'
 ]
 
-print("SYSTEM DATA INGESTION (STOCK VN) HAS STARTED...")
+PRODUCER_INDEX = int(os.environ.get("PRODUCER_INDEX", "0"))
+PRODUCER_TOTAL = int(os.environ.get("PRODUCER_TOTAL", "1"))
+
+# Chia đều danh sách mã chứng khoán (Sharding)
+chunk_size = max(1, len(ALL_SYMBOLS) // PRODUCER_TOTAL)
+start_idx = PRODUCER_INDEX * chunk_size
+end_idx = start_idx + chunk_size if PRODUCER_INDEX < PRODUCER_TOTAL - 1 else len(ALL_SYMBOLS)
+
+SYMBOLS = ALL_SYMBOLS[start_idx:end_idx]
+
+print(f"HỆ THỐNG DATA INGESTION (STOCK VN) KHỞI ĐỘNG...")
+print(f"-> Producer {PRODUCER_INDEX + 1}/{PRODUCER_TOTAL} | Quản lý {len(SYMBOLS)} mã: {SYMBOLS[:3]}...")
 
 def fetch_stock_prices():
     try:

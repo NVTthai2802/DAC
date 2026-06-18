@@ -27,13 +27,13 @@ DRUID_SINGLE_NODE_CONF=micro-quickstart
 
 druid_emitter_logging_logLevel=debug
 
-druid_extensions_loadList=["druid-histogram", "druid-datasketches", "druid-lookups-cached-global", "postgresql-metadata-storage", "druid-kafka-indexing-service"]
+druid_extensions_loadList=["druid-histogram", "druid-datasketches", "druid-lookups-cached-global", "postgresql-metadata-storage", "druid-kafka-indexing-service", "prometheus-emitter"]
 
-druid_zk_service_host=zookeeper
+druid_zk_service_host=zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181
 
 druid_metadata_storage_host=
 druid_metadata_storage_type=postgresql
-druid_metadata_storage_connector_connectURI=jdbc:postgresql://postgres:5432/druid
+druid_metadata_storage_connector_connectURI=jdbc:postgresql://postgres-primary:5432/druid
 druid_metadata_storage_connector_user=druid
 druid_metadata_storage_connector_password=FoolishPassword
 

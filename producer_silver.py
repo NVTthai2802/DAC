@@ -1,12 +1,14 @@
 import json
 import time
+import os
 from datetime import datetime
 from kafka import KafkaProducer
 import yfinance as yf
 
-# Cấu hình Kafka
+# Cấu hình Kafka (hỗ trợ cả localhost và Docker)
+KAFKA_BROKER = os.environ.get("KAFKA_BROKER", "localhost:9092")
 producer = KafkaProducer(
-    bootstrap_servers=['localhost:9092'],
+    bootstrap_servers=[KAFKA_BROKER],
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
